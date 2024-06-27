@@ -24,19 +24,14 @@ public class ConfigValues {
     @Getter
     private static boolean npcCombatLog = true;
     @Getter
-    private static String combatTaggedMessage = null;
-    @Getter
-    private static String logInAfterKillMessage = null;
-    @Getter
-    private static String unCombatTaggedMessage = null;
-    @Getter
-    private static String combatLoggedMessage = null;
-    @Getter
-    private static String actionBarMessage = null;
-    @Getter
-    private static String combatExpiredMessage = null;
-    @Getter
-    private static String killMessage = null;
+    private static String combatTaggedMessage = null,
+            logInAfterKillMessage = null,
+            unCombatTaggedMessage = null,
+            combatLoggedMessage = null,
+            actionBarMessage = null,
+            combatExpiredMessage = null,
+            killMessage = null,
+            teleportBlockedMessage = null;
     @Getter
     private static NotifyType notifyType = NotifyType.BOTH;
 
@@ -46,8 +41,7 @@ public class ConfigValues {
     private static String blockedCommandMessage = null;
 
     @Getter
-    private static boolean setDeathMessage = true, enableHologram = true, blockedCommandsRegex = true,
-            disableFly = false, tagOnPearl = false, enableBlockedCommands = true;
+    private static boolean setDeathMessage = true, enableHologram = true, blockedCommandsRegex = true, disableFly = false, tagOnPearl = false, enableBlockedCommands = true, disableTeleport = false;
 
     @Getter
     private static List<String> exemptWorlds;
@@ -83,7 +77,9 @@ public class ConfigValues {
         setDeathMessage = getConfig().getBoolean("set-death-message", true);
         exemptWorlds = getConfig().getStringList("exempt-worlds");
         disableFly = getConfig().getBoolean("disable.fly", false);
+        disableTeleport = getConfig().getBoolean("disable.teleport", false);
         tagOnPearl = getConfig().getBoolean("tag-on-enderpearl", true);
+        teleportBlockedMessage = format(getConfig().getString("messages.teleport-blocked", "&cYou cannot teleport while in combat."));
     }
 
     public static void reload() {

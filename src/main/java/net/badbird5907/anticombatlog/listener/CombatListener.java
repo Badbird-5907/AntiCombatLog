@@ -104,6 +104,12 @@ public class CombatListener implements Listener {
 
     @EventHandler
     public void onTeleport(PlayerTeleportEvent event) {
+        if (AntiCombatLog.isCombatTagged(event.getPlayer()) && ConfigValues.isDisableTeleport()) {
+            event.setCancelled(true);
+            if (ConfigValues.getTeleportBlockedMessage() != null && !ConfigValues.getTeleportBlockedMessage().isEmpty())
+                event.getPlayer().sendMessage(ConfigValues.getTeleportBlockedMessage());
+            return;
+        }
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.ENDER_PEARL) {
             if (ConfigValues.isTagOnPearl()) {
                 AntiCombatLog.tag(event.getPlayer(), event.getPlayer());
